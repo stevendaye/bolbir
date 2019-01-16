@@ -1,7 +1,7 @@
 {
-  "name": "Bolbira",
+  "name": "bolbir",
   "version": "1.0.0",
-  "description": "Bolbira | Simple Search Appliction",
+  "description": "bolbir | Simple Search Appliction",
   "main": "App.js",
   "directories": {
     "test": "tests"
