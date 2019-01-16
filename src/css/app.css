@@ -1,0 +1,160 @@
+/* ##### App Style ##### */
+/* Top Style */
+.app_wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  background-color: rgb(167, 15, 15);
+  height: 275px;
+}
+
+header div.up-front {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+header div.up-front h1 {
+  margin: 0;
+  padding: 15px 0 0 0;
+  color: white;
+  font-size: 3em;
+  padding: 10px;
+  width: 110px;
+}
+
+header div.up-front h2 {
+  color: white;
+  text-align: center;
+}
+
+header div:last-child a {
+  color: white;
+}
+
+header div h4 {
+  color: white;
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 1085px;
+  top: 22px;
+}
+
+ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0 10px 0 0;
+  float: left;
+}
+
+ul li a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .9em;
+  margin: 0;
+  padding: 0 10px 0 10px;
+  text-decoration: none;
+  color: white;
+}
+
+/* Search Box */
+.search-box-wrapper {
+  width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-box {
+  width: 600px;
+  height: 45px;
+  border: none;
+  border-radius: 7px 0 0 7px;
+  margin: 0;
+  padding: 10px 15px 10px 15px;
+}
+
+.search-button {
+  margin: 0;
+  padding: 15.4px;
+  color: white;
+  width: 100px;
+  background-color: rgb(20, 19, 19);
+  border-radius: 0 7px 7px 0;
+  border: none;
+}
+
+/* Sorts styles */
+.sort-points {
+  color: rgb(167, 15, 15);
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0 10px 0;
+  float: right;
+}
+
+/* #### Search Result Style #### */
+.search-result {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+section {
+  font-family: Arial;
+  font-size: .9em;
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0 15px 0 15px;
+  margin: 10px 0 10px 0;
+  box-shadow: 2px 2px 5px #faeaea;
+  -webkit-box-shadow: 2px 2px 5px #aaaaaa;
+  -moz-box-shadow: 2px 2px 5px #aaaaaa;
+  background-color: white;
+}
+
+section a, section a:active {
+  text-decoration: none;
+  color: rgb(167, 15, 15);
+}
+
+section p:first-child {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+section p:nth-child(4) {
+  color: rgb(80, 78, 78);
+}
+
+section span, section button {
+  position: relative;
+  left: 600px;
+  margin: 25px;
+}
+
+section span.search-opt {
+  font-size: 1.5em;
+  color: rgb(167, 15, 15);
+  margin-left: -1055px;
+}
+
+section span.search-opt:hover {
+  cursor: pointer;
+}
+
+/* Remove Button */
+.rm-btn {
+  margin: 0;
+  padding: 7px;
+  color: white;
+  width: 70px;
+  background-color: rgb(20, 19, 19);
+  border-radius: 4px;
+  border: none;
+}
