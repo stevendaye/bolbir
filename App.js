@@ -1,39 +1,58 @@
+/* ## bolbir main file: App.js ## */
 import React, { Component } from "react";
-import list from "./client/list";
 import Search from "./components/Search";
 import Table from "./components/Table";
+import Loading from "./components/Loading";
+import Err from "./components/Error";
 import "./src/css/app.css"
 
-const DEFAULT_SEARCH = "W";
-
-const isSearched = searchTerm => item =>
-  item.title.toLowerCase().includes(searchTerm) || item.title.toUpperCase().includes(searchTerm);
+const PATH_BASE = "http://hn.algolia.com/api/v1";
+const PATH_SEARCH = "/search";
+const PARAM_SEARCH = "query="
+const DEFAULT_SEARCH = "redux";
 
 class App extends Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      list,
-      searchTerm: ""
+      result: null,
+      searchTerm: DEFAULT_SEARCH,
+      error: null
     };
 
+    this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
-    this.onRemove = this.onRemove.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
   }
 
-  onRemove (id) {
+  // Defining core coponent methods
+  onDismiss (id) {
+    const { result } = this.state;
     const isNotID = item => item.objectID !== id;
-    const updatedList = this.state.list.filter(isNotID);
-    this.setState({list: updatedList});
+    const updatedHits = result.hits.filter(isNotID);
+    this.setState({result: { hits: updatedHits }});
   }
   onSearchChange (e) {
     this.setState({ searchTerm: e.target.value });
   }
+  setSearchTopStories (result) {
+    this.setState({ result });
+  }
+
+  // Using core component licycles methods
+  componentDidMount () {
+    const { searchTerm } = this.state;
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(error => this.setState({ error }));
+  }
 
   render () {
-    const { list, searchTerm } = this.state;
+    const { result, searchTerm, error } = this.state;
     const hello = "Hello I am bolbir. Your Friendly Search App";
+    console.log(result);
     
     return (
       <div className = "app_wrapper">
@@ -53,9 +72,9 @@ class App extends Component {
             <h2>{hello}</h2>
             <Search
               value = {searchTerm}
-              onChange = {this.onSearchChange}
-              placeholder = "Type something you are interested in"
+              placeholder = "Type something you are interested in!"
               type = "search"
+              onChange = {this.onSearchChange}
             >
               Search
             </Search>
@@ -67,13 +86,19 @@ class App extends Component {
           </div>
         </header>
 
-        <Table
-          pattern = {searchTerm}
-          onRemove = {this.onRemove}
-          isSearched = {isSearched}
-          list = {list}
-        />
-
+        { result
+          ? <Table
+              list = {result.hits}
+              onDismiss = {this.onDismiss}
+            />
+          : <Loading
+            error = {error}
+          />
+        }
+        { error
+          ? <Err/>
+          : ""
+        }
       </div>
     );
   
