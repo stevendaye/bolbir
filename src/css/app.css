@@ -7,8 +7,8 @@
 
 header {
   position: relative;
-  background-color: rgb(167, 15, 15);
-  height: 275px;
+  background-image: linear-gradient(50deg, rgb(20, 19, 19), rgb(167, 15, 15), rgb(167, 15, 15), red);
+  height: 250px;
 }
 
 header div.up-front {
@@ -29,6 +29,7 @@ header div.up-front h1 {
 header div.up-front h2 {
   color: white;
   text-align: center;
+  margin: 5px 0 17px 0;
 }
 
 header div:last-child a {
@@ -66,27 +67,27 @@ ul li a {
 
 /* Search Box */
 .search-box-wrapper {
-  width: 700px;
+  width: 750px;
   margin: 0 auto;
   position: relative;
 }
 
 .search-box {
-  width: 600px;
-  height: 45px;
+  width: 645px;
+  height: 50px;
   border: none;
-  border-radius: 7px 0 0 7px;
+  border-radius: 25px 0 0 25px;
   margin: 0;
   padding: 10px 15px 10px 15px;
 }
 
 .search-button {
   margin: 0;
-  padding: 15.4px;
+  padding: 18px;
   color: white;
   width: 100px;
   background-color: rgb(20, 19, 19);
-  border-radius: 0 7px 7px 0;
+  border-radius: 0 25px 25px 0;
   border: none;
 }
 
@@ -125,7 +126,7 @@ section a, section a:active {
 }
 
 section p:first-child {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 section p:nth-child(4) {
@@ -134,7 +135,7 @@ section p:nth-child(4) {
 
 section span, section button {
   position: relative;
-  left: 600px;
+  left: 725px;
   margin: 25px;
 }
 
@@ -148,6 +149,11 @@ section span.search-opt:hover {
   cursor: pointer;
 }
 
+section i {
+  float: right;
+  margin: 0 5px 0 0;
+}
+
 /* Remove Button */
 .rm-btn {
   margin: 0;
@@ -157,4 +163,12 @@ section span.search-opt:hover {
   background-color: rgb(20, 19, 19);
   border-radius: 4px;
   border: none;
+}
+
+/* Loding and Error Style*/
+.loading, .error {
+  font-size: 2em;
+  color: rgba(20, 19, 19, .2);
+  text-align: center;
+  margin: 145px 0 0 0;
 }
