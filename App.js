@@ -6,6 +6,7 @@ import Loading from "./components/Loading";
 import Err from "./components/Error";
 import "./src/css/app.css"
 import Button from "./components/Button";
+import axios from "axios";
 
 const PATH_BASE = "http://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
@@ -16,6 +17,9 @@ const PARAM_HPP = "hitsPerPage=";
 const DEFAULT_HPP = "15";
 
 class App extends Component {
+  // Using ES6 Class Field to prevent the component from updating the state when it's unmounted
+  _isMounted = false;
+
   constructor (props) {
     super(props);
 
@@ -60,10 +64,9 @@ class App extends Component {
   }
   fecthSearchTopStories(searchTerm, page = 0) {
     this.setState({ isLoading: true });
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
-      .catch(error => this.setState({ error }));
+    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+      .then(result => this._isMounted && this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
   }
   needsToSearchTopStories (searchTerm) {
     const { results } = this.state;
@@ -91,8 +94,12 @@ class App extends Component {
 
   // Using core component licycles methods
   componentDidMount () {
+    this._isMounted = true;
     const { searchTerm } = this.state;
     this.fecthSearchTopStories(searchTerm);
+  }
+  componentWillUnmount () {
+    this._isMounted = false;
   }
 
   render () {
