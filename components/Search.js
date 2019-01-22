@@ -2,9 +2,9 @@
 import React from "react";
 import Button from "./Button";
 
-const Search = ({ value, onChange, placeholder, type, onSearchSubmit, children }) =>
+const Search = ({ value, onChange, placeholder, type, onSubmit, children }) =>
   <div className = "search-box-wrapper">
-    <form>
+    <form onSubmit = {onSubmit} >
       <input
         className = "search-box"
         value= {value}
@@ -13,8 +13,9 @@ const Search = ({ value, onChange, placeholder, type, onSearchSubmit, children }
         onChange = {onChange}
       />
       <Button
+        type = "submit"
         className = "search-button"
-        onClick = {onSearchSubmit}
+        onClick = ""
       >
         {children}
       </Button>

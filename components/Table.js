@@ -19,6 +19,7 @@ const Table = ({ list, onDismiss }) => (
         <span>Comments: {item.num_comments}</span>
         <span>Points: {item.points}</span>
         <Button
+          type = "button"
           className = "rm-btn"
           onClick = {() => {onDismiss(item.objectID)}}
         >

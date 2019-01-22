@@ -5,11 +5,15 @@ import Table from "./components/Table";
 import Loading from "./components/Loading";
 import Err from "./components/Error";
 import "./src/css/app.css"
+import Button from "./components/Button";
 
 const PATH_BASE = "http://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query="
 const DEFAULT_SEARCH = "redux";
+const PARAM_PAGE = "page=";
+const PARAM_HPP = "hitsPerPage=";
+const DEFAULT_HPP = "25";
 
 class App extends Component {
   constructor (props) {
@@ -18,9 +22,12 @@ class App extends Component {
     this.state = {
       result: null,
       searchTerm: DEFAULT_SEARCH,
-      error: null
+      error: null,
+      isLoading: false
     };
 
+    this.fecthSearchTopStories = this.fecthSearchTopStories.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
@@ -37,22 +44,42 @@ class App extends Component {
     this.setState({ searchTerm: e.target.value });
   }
   setSearchTopStories (result) {
-    this.setState({ result });
-  }
-
-  // Using core component licycles methods
-  componentDidMount () {
+    const { hits, page } = result;
+    const old_hits = page !== 0 ? this.state.result.hits : [];
+    const updatedHits = [ ...hits, ...old_hits ];
+    this.setState({
+      result: { hits: updatedHits },
+      isLoading: false
+    });
+  } 
+  onSearchSubmit (e) {
     const { searchTerm } = this.state;
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+    this.fecthSearchTopStories(searchTerm);
+    e.preventDefault();
+  }
+  fecthSearchTopStories(searchTerm, page = 0) {
+    this.setState({ isLoading: true });
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => this.setState({ error }));
   }
 
+  // Using core component licycles methods
+  componentDidMount () {
+    const { searchTerm } = this.state;
+    this.fecthSearchTopStories(searchTerm);
+  }
+
   render () {
-    const { result, searchTerm, error } = this.state;
     const hello = "Hello I am bolbir. Your Friendly Search App";
-    console.log(result);
+    const {
+      result,
+      searchTerm,
+      error,
+      isLoading
+    } = this.state;
+    const page = (result && result.page) || 0; // in case there is no result, so the page is 0;
     
     return (
       <div className = "app_wrapper">
@@ -75,13 +102,14 @@ class App extends Component {
               placeholder = "Type something you are interested in!"
               type = "search"
               onChange = {this.onSearchChange}
+              onSubmit = {this.onSearchSubmit}
             >
               Search
             </Search>
           </div>
           <div>
             <h4>
-              <small><a href = "#">I am looking for tech contents</a></small>&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<small><a href = "#">Person of Interest</a></small>
+              <small><a href = "#">I am looking for tech related contents</a></small>&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<small><a href = "#">Person of Interest</a></small>
             </h4>  
           </div>
         </header>
@@ -98,6 +126,19 @@ class App extends Component {
         { error
           ? <Err/>
           : ""
+        }
+        {
+          isLoading
+          ? ""
+          : <div className = "more-btn-wrapper">
+              <Button
+                type = "button"
+                className = "more-btn"
+                onClick = {() => {this.fecthSearchTopStories(searchTerm, page + 1)}}
+              >
+                +
+              </Button>
+            </div>
         }
       </div>
     );
