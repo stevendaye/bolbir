@@ -13,7 +13,7 @@ const PARAM_SEARCH = "query="
 const DEFAULT_SEARCH = "redux";
 const PARAM_PAGE = "page=";
 const PARAM_HPP = "hitsPerPage=";
-const DEFAULT_HPP = "25";
+const DEFAULT_HPP = "15";
 
 class App extends Component {
   constructor (props) {
@@ -40,7 +40,7 @@ class App extends Component {
     const { hits, page } = result;
     const { results, searchKey } = this.state;
     const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
-    const updatedHits = [ ...hits, ...old_hits ];
+    const updatedHits = [ ...old_hits, ...hits];
     this.setState({
       results: {
         ...results,
@@ -152,22 +152,18 @@ class App extends Component {
           </div>
         </header>
 
-        { results
+        { !error
           ? <Table
               list = {list}
               onDismiss = {this.onDismiss}
             />
-          : <Loading
-            error = {error}
-          />
-        }
-        { error
-          ? <Err/>
-          : ""
+          : <Err/>
         }
         {
           isLoading
-          ? ""
+          ? <Loading
+            error = {error}
+          />
           : <div className = "more-btn-wrapper">
               <Button
                 type = "button"
