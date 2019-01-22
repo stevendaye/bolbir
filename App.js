@@ -20,12 +20,14 @@ class App extends Component {
     super(props);
 
     this.state = {
-      result: null,
+      results: null,
       searchTerm: DEFAULT_SEARCH,
       error: null,
-      isLoading: false
+      isLoading: false,
+      searchKey: ""
     };
 
+    this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     this.fecthSearchTopStories = this.fecthSearchTopStories.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
@@ -34,27 +36,26 @@ class App extends Component {
   }
 
   // Defining core coponent methods
-  onDismiss (id) {
-    const { result } = this.state;
-    const isNotID = item => item.objectID !== id;
-    const updatedHits = result.hits.filter(isNotID);
-    this.setState({result: { hits: updatedHits }});
-  }
-  onSearchChange (e) {
-    this.setState({ searchTerm: e.target.value });
-  }
   setSearchTopStories (result) {
     const { hits, page } = result;
-    const old_hits = page !== 0 ? this.state.result.hits : [];
+    const { results, searchKey } = this.state;
+    const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
     const updatedHits = [ ...hits, ...old_hits ];
     this.setState({
-      result: { hits: updatedHits },
+      results: {
+        ...results,
+        [searchKey]: {
+          hits: updatedHits,
+          page
+        }
+      },
       isLoading: false
     });
   } 
   onSearchSubmit (e) {
     const { searchTerm } = this.state;
-    this.fecthSearchTopStories(searchTerm);
+    this.setState({ searchKey: searchTerm });
+    this.needsToSearchTopStories(searchTerm) && this.fecthSearchTopStories(searchTerm);
     e.preventDefault();
   }
   fecthSearchTopStories(searchTerm, page = 0) {
@@ -63,6 +64,29 @@ class App extends Component {
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => this.setState({ error }));
+  }
+  needsToSearchTopStories (searchTerm) {
+    const { results } = this.state;
+    return !results[searchTerm];
+  }
+
+  onDismiss (id) {
+    const { results, searchKey } = this.state;
+    const {hits, page} = results[searchKey];
+    const isNotID = item => item.objectID !== id;
+    const updatedHits = hits.filter(isNotID);
+    this.setState({
+      results: {
+        ...results,
+        [searchKey]: {
+          hits: updatedHits,
+          page
+        }
+      }
+    });
+  }
+  onSearchChange (e) {
+    this.setState({ searchTerm: e.target.value });
   }
 
   // Using core component licycles methods
@@ -73,13 +97,26 @@ class App extends Component {
 
   render () {
     const hello = "Hello I am bolbir. Your Friendly Search App";
+
     const {
-      result,
+      results,
       searchTerm,
       error,
-      isLoading
+      isLoading,
+      searchKey
     } = this.state;
-    const page = (result && result.page) || 0; // in case there is no result, so the page is 0;
+
+    const page = (
+      results &&
+      results[results] &&
+      results[searchKey].page
+    ) || 0; // In case there is no results, so the page number is 0;
+
+    const list = (
+      results &&
+      results[searchKey] &&
+      results[searchKey].hits
+    ) || []; // In case there is no list result, it returns an empty array. With this, no more need to do a conditional rendering;
     
     return (
       <div className = "app_wrapper">
@@ -109,14 +146,15 @@ class App extends Component {
           </div>
           <div>
             <h4>
-              <small><a href = "#">I am looking for tech related contents</a></small>&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<small><a href = "#">Person of Interest</a></small>
+              <small><a href = "#">I am looking for tech related contents</a></small>&nbsp;&nbsp;&nbsp;<span>|
+              </span>&nbsp;&nbsp;<small><a href = "#">Person of Interest</a></small>
             </h4>  
           </div>
         </header>
 
-        { result
+        { results
           ? <Table
-              list = {result.hits}
+              list = {list}
               onDismiss = {this.onDismiss}
             />
           : <Loading
@@ -134,7 +172,7 @@ class App extends Component {
               <Button
                 type = "button"
                 className = "more-btn"
-                onClick = {() => {this.fecthSearchTopStories(searchTerm, page + 1)}}
+                onClick = {() => {this.fecthSearchTopStories(searchKey, page + 1)}}
               >
                 +
               </Button>
