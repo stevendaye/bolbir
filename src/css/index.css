@@ -34,3 +34,8 @@ a {
 .hide {
   display: none;
 }
+
+em.read-more {
+  color: rgb(115, 115, 115);
+  font-size: .8em;
+}
