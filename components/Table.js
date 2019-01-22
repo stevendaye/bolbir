@@ -9,13 +9,13 @@ const Table = ({ list, onDismiss }) => (
       <div className = "clear"></div>
 
     {list.map( item =>
-      <section key = {item.objectID}>
+      <section key = {item.objectID} style = { (!item.title || !item.url) ? {display: "none"} : {display: "block"}}>
         <h3><a href= {item.url}>{item.title}</a></h3>
         <div className = "clear"></div>
         <i>{item.author}</i>
         <p><a href= {item.url}>{item.url}</a></p>
         <hr/>
-        <p>{item.title}</p>
+        <p>{item.title}<a href= {item.url}><em className = "read-more">...Read More...</em></a></p>
         <span>Comments: {item.num_comments}</span>
         <span>Points: {item.points}</span>
         <Button
