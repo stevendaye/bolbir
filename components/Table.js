@@ -1,6 +1,7 @@
 /* List Table Styles */
 import React from "react";
 import Button from "./Button";
+import PropTypes from "prop-types";
 
 const Table = ({ list, onDismiss }) => (
   <div className = "search-result">
@@ -30,5 +31,20 @@ const Table = ({ list, onDismiss }) => (
     )}
   </div>
 );
+
+// Checking the types of the Table props
+Table.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      objectID: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      author: PropTypes.string,
+      url: PropTypes.string,
+      num_comments: PropTypes.number,
+      points: PropTypes.number,
+    })
+  ).isRequired,
+  onDismiss: PropTypes.func.isRequired
+};
 
 export default Table;
