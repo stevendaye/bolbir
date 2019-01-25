@@ -32,7 +32,7 @@ const Table = ({ list, onDismiss }) => (
   </div>
 );
 
-// Checking the types of the Table props
+// Checking Table Props type
 Table.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({

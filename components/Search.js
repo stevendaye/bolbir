@@ -1,6 +1,7 @@
 /* ## Search Component ## */
 import React from "react";
 import Button from "./Button";
+import PropTypes from "prop-types";
 
 const Search = ({ value, onChange, placeholder, type, onSubmit, onClick, children }) =>
   <div className = "search-box-wrapper">
@@ -22,4 +23,14 @@ const Search = ({ value, onChange, placeholder, type, onSubmit, onClick, childre
     </form>
   </div>
 
+// Checking Search Props type;
+Search.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired
+};
 export default Search;
