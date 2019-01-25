@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App has a valid snapshot 1`] = `
+<div
+  className="app_wrapper"
+>
+  <header>
+    <div
+      className="up-front"
+    >
+      <div
+        className="app-name"
+      >
+        <h1>
+          bolbir
+        </h1>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a
+              href="#"
+            >
+              Sign in
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              Popular
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              Pin
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <h2>
+        Hello I am bolbir. Your Friendly Search App
+      </h2>
+      <div
+        className="search-box-wrapper"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            className="search-box"
+            onChange={[Function]}
+            placeholder="Type something you are interested in!"
+            type="search"
+            value="redux"
+          />
+          <button
+            className="search-button"
+            onClick={[Function]}
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <h4>
+        <small>
+          <a
+            href="#"
+          >
+            I am looking for tech related contents
+          </a>
+        </small>
+           
+        <span>
+          |
+        </span>
+          
+        <small>
+          <a
+            href="#"
+          >
+            Person of Interest
+          </a>
+        </small>
+      </h4>
+    </div>
+  </header>
+  <div
+    className="search-result"
+  >
+    <div
+      className="sort-points"
+    >
+      ...
+    </div>
+    <div
+      className="clear"
+    />
+  </div>
+  <div
+    className="loading"
+  >
+    Loading...
+  </div>
+</div>
+`;
+
+exports[`Button has a valid snapshot 1`] = `
+<button
+  className=""
+>
+  Click Me
+</button>
+`;
+
+exports[`Error has a valid snapshot 1`] = `
+<div
+  className="error"
+>
+  Oups, Something went wrong!
+  <br />
+  Please, check your internet connection or update your date!
+</div>
+`;
+
+exports[`Loading has a valid snapshot 1`] = `
+<div
+  className="loading"
+>
+  Loading...
+</div>
+`;
+
+exports[`Search has a valid snapshot 1`] = `
+<div
+  className="search-box-wrapper"
+>
+  <form>
+    <input
+      className="search-box"
+    />
+    <button
+      className="search-button"
+      type="submit"
+    >
+      Search
+    </button>
+  </form>
+</div>
+`;
+
+exports[`Table has a valid snapshot 1`] = `
+<div
+  className="search-result"
+>
+  <div
+    className="sort-points"
+  >
+    ...
+  </div>
+  <div
+    className="clear"
+  />
+  <section
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <h3>
+      <a>
+        React
+      </a>
+    </h3>
+    <div
+      className="clear"
+    />
+    <i>
+      Clark
+    </i>
+    <p>
+      <a />
+    </p>
+    <hr />
+    <p>
+      React
+      <a>
+        <em
+          className="read-more"
+        >
+          ...Read More...
+        </em>
+      </a>
+    </p>
+    <span>
+      Comments: 
+      12
+    </span>
+    <span>
+      Points: 
+      7
+    </span>
+    <button
+      className="rm-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      Dismiss
+    </button>
+    <span
+      className="search-opt"
+    >
+      ...
+    </span>
+  </section>
+  <section
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <h3>
+      <a>
+        Redux
+      </a>
+    </h3>
+    <div
+      className="clear"
+    />
+    <i>
+      Abramov
+    </i>
+    <p>
+      <a />
+    </p>
+    <hr />
+    <p>
+      Redux
+      <a>
+        <em
+          className="read-more"
+        >
+          ...Read More...
+        </em>
+      </a>
+    </p>
+    <span>
+      Comments: 
+      77
+    </span>
+    <span>
+      Points: 
+      40
+    </span>
+    <button
+      className="rm-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      Dismiss
+    </button>
+    <span
+      className="search-opt"
+    >
+      ...
+    </span>
+  </section>
+  <section
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <h3>
+      <a>
+        Flux
+      </a>
+    </h3>
+    <div
+      className="clear"
+    />
+    <i>
+      Simon
+    </i>
+    <p>
+      <a />
+    </p>
+    <hr />
+    <p>
+      Flux
+      <a>
+        <em
+          className="read-more"
+        >
+          ...Read More...
+        </em>
+      </a>
+    </p>
+    <span>
+      Comments: 
+      144
+    </span>
+    <span>
+      Points: 
+      3
+    </span>
+    <button
+      className="rm-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      Dismiss
+    </button>
+    <span
+      className="search-opt"
+    >
+      ...
+    </span>
+  </section>
+</div>
+`;
