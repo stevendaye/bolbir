@@ -7,6 +7,7 @@ import Err from "./components/Error";
 import "./src/css/app.css"
 import Button from "./components/Button";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const PATH_BASE = "http://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
@@ -36,10 +37,17 @@ class App extends Component {
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.notify = this.notify.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
 
   // Defining core coponent methods
+  fecthSearchTopStories(searchTerm, page = 0) {
+    this.setState({ isLoading: true });
+    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+      .then(result => this._isMounted && this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
+  }
   setSearchTopStories (result) {
     const { hits, page } = result;
     const { results, searchKey } = this.state;
@@ -61,12 +69,6 @@ class App extends Component {
     this.setState({ searchKey: searchTerm });
     this.needsToSearchTopStories(searchTerm) && this.fecthSearchTopStories(searchTerm);
     e.preventDefault();
-  }
-  fecthSearchTopStories(searchTerm, page = 0) {
-    this.setState({ isLoading: true });
-    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(result => this._isMounted && this.setSearchTopStories(result.data))
-      .catch(error => this._isMounted && this.setState({ error }));
   }
   needsToSearchTopStories (searchTerm) {
     const { results } = this.state;
@@ -90,6 +92,9 @@ class App extends Component {
   }
   onSearchChange (e) {
     this.setState({ searchTerm: e.target.value });
+  }
+  notify () {
+    console.log("Search Term Sent.");
   }
 
   // Using core component licycles methods
@@ -147,6 +152,7 @@ class App extends Component {
               type = "search"
               onChange = {this.onSearchChange}
               onSubmit = {this.onSearchSubmit}
+              onClick = {this.notify}
             >
               Search
             </Search>
@@ -166,6 +172,7 @@ class App extends Component {
             />
           : <Err/>
         }
+        
         {
           isLoading
           ? <Loading
@@ -183,7 +190,6 @@ class App extends Component {
         }
       </div>
     );
-  
   }
 }
 
