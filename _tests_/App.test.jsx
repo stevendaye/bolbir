@@ -37,10 +37,19 @@ describe ("App", () => {
 // Creating a test suit for the Search Component
 describe("Search", () => {
 
+  const value = "redux";
+
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
-      <Search>
+      <Search
+        value = {value}
+        placeholder = "type something!"
+        type = "text"
+        onChange = {() => { console.log("Seachbox Changed") }}
+        onSubmit = {() => { console.log("Submitted") }}
+        onClick = {() => { console.log("Clicked") }}
+      >
         Search
       </Search>, div
     );
@@ -49,7 +58,14 @@ describe("Search", () => {
 
   test("has a valid snapshot", () => {
     const component = renderer.create(
-      <Search>
+      <Search
+        value = {value}
+        placeholder = "type something!"
+        type = "text"
+        onChange = {() => { console.log("Seachbox Changed") }}
+        onSubmit = {() => { console.log("Submitted") }}
+        onClick = {() => { console.log("Clicked") }}
+      >
         Search
       </Search>
     );
@@ -62,17 +78,23 @@ describe("Search", () => {
 // Creating a test suit for the Loading Component
 describe("Loading", () => {
   
+  const isLoading = true;
+
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
-      <Loading/>, div
+      <Loading
+        error = {isLoading}
+      />, div
     );
     ReactDOM.unmountComponentAtNode(div);
   });
 
   test("has a valid snapshot", () => {
     const component = renderer.create(
-      <Loading/>
+      <Loading
+        error = {isLoading}
+      />
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -105,7 +127,10 @@ describe("Button", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
-      <Button>
+      <Button
+        type = "button"
+        onClick = {() => { console.log("Button Clicked") }}
+      >
         Click Me
       </Button>, div
     );
@@ -114,7 +139,10 @@ describe("Button", () => {
 
   test("has a valid snapshot", () =>{
     const component = renderer.create(
-      <Button>
+      <Button
+        type = "button"
+        onClick = {() => { console.log("Button Clicked") }}
+      >
         Click Me
       </Button>
     );
@@ -140,6 +168,7 @@ describe("Table", () => {
     ReactDOM.render(
       <Table
         {...props}
+        onDismiss = {() => { console.log("Search Result Dismissed") }}
       />, div
     );
     ReactDOM.unmountComponentAtNode(div);
@@ -149,6 +178,7 @@ describe("Table", () => {
     const element = shallow(
       <Table
         {...props}
+        onDismiss = {() => { console.log("Search Result Dismissed") }}
       />
     );
     expect(element.find(".search-result").length).toBe(3);
@@ -158,6 +188,7 @@ describe("Table", () => {
     const component = renderer.create(
       <Table
         {...props}
+        onDismiss = {() => { console.log("Search Result Dismissed") }}
       />
     );
     const tree = component.toJSON();
