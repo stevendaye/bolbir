@@ -77,24 +77,18 @@ describe("Search", () => {
 
 // Creating a test suit for the Loading Component
 describe("Loading", () => {
-  
-  const isLoading = true;
 
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
-      <Loading
-        error = {isLoading}
-      />, div
+      <Loading/>, div
     );
     ReactDOM.unmountComponentAtNode(div);
   });
 
   test("has a valid snapshot", () => {
     const component = renderer.create(
-      <Loading
-        error = {isLoading}
-      />
+      <Loading/>
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -174,14 +168,14 @@ describe("Table", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it("has three elements", () => {
+  it("has one element", () => {
     const element = shallow(
       <Table
         {...props}
         onDismiss = {() => { console.log("Search Result Dismissed") }}
       />
     );
-    expect(element.find(".search-result").length).toBe(3);
+    expect(element.find(".search-result").length).toBe(1);
   });
 
   test("has a valid snapshot", () => {

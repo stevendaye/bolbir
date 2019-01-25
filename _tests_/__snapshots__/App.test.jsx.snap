@@ -132,7 +132,7 @@ exports[`Error has a valid snapshot 1`] = `
 
 exports[`Loading has a valid snapshot 1`] = `
 <div
-  className="hide"
+  className="loading"
 >
   Loading...
 </div>

@@ -9,7 +9,7 @@ const Loading = ({ error }) =>
 
 // Checking Loading Props type;
 Loading.propTypes = {
-  error: PropTypes.bool.isRequired
+  error: PropTypes.bool
 };
 
 export default Loading;
