@@ -13,9 +13,12 @@ const SORTS = {
   POINTS: list => sortBy(list, "points").reverse()
 }
 
-const Table = ({list, duplicateKey, onDismiss, sortKey, onSort }) => {
+const Table = ({list, duplicateKey, onDismiss, sortKey, onSort, isSortReverse }) => {
 
   const sortedList = SORTS[sortKey](list);
+  const reverseSortedList = isSortReverse
+    ? sortedList.reverse()
+    : sortedList
 
   return (
     <div className = "search-result">
@@ -45,7 +48,7 @@ const Table = ({list, duplicateKey, onDismiss, sortKey, onSort }) => {
         </div>
         <div className = "clear"></div>
 
-      {sortedList.map( item =>
+      {reverseSortedList.map( item =>
         <section
           key = {item.objectID}
           style = { (!item.title || !item.url || item.objectID === duplicateKey) ? {display: "none"} : {display: "block"}}

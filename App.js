@@ -32,7 +32,8 @@ class App extends Component {
       isLoading: false,
       isLoadingMore: false,
       searchKey: "",
-      sortKey: "NONE"
+      sortKey: "NONE",
+      isSortReverse: false
     };
 
     this.loadMoreTopStories = this.loadMoreTopStories.bind(this);
@@ -107,7 +108,8 @@ class App extends Component {
   }
 
   onSort (sortKey) {
-    this.setState({ sortKey });
+    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey, isSortReverse });
   }
 
   // Using core component licycles methods
@@ -131,7 +133,8 @@ class App extends Component {
       isLoading,
       isLoadingMore,
       searchKey,
-      sortKey
+      sortKey,
+      isSortReverse
     } = this.state;
 
     const page = (
@@ -188,6 +191,7 @@ class App extends Component {
           onDismiss = {this.onDismiss}
           sortKey = {sortKey}
           onSort = {this.onSort}
+          isSortReverse = {isSortReverse}
         />
         <ButtonWithLoading
           type = "button"
