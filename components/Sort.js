@@ -3,15 +3,21 @@ import React from "react";
 import Button from "../components/Button";
 import PropTypes from "prop-types";
 
-const Sort = ({ onSort, sortKey, children }) =>
-  <Button
-    type = "button"
-    className = "sort-btn"
-    onClick = {() => {onSort(sortKey)}}
-  >
-    {children}
-  </Button>
+const Sort = ({ onSort, sortKey, children, activeSortKey }) => {
+  
+  const sortClass = ["sort-btn"]
+  sortKey === activeSortKey && sortClass.push("sort-btn-active");
 
+  return (
+    <Button
+      type = "button"
+      className = {sortClass.join(" ")}
+      onClick = {() => {onSort(sortKey)}}
+    >
+      {children}
+    </Button>
+  )
+}
 // Checking the Sort Props type
 Sort.propTypes = {
   onSort: PropTypes.func.isRequired,

@@ -25,22 +25,22 @@ const Table = ({list, duplicateKey, onDismiss, sortKey, onSort, isSortReverse })
 
         <div className = "sort-points">
           <span className = "sort-name">
-            <Sort sortKey = {"TITLE"} onSort = {onSort}>
+            <Sort sortKey = {"TITLE"} onSort = {onSort} activeSortKey = {sortKey}>
               Title
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"AUTHOR"} onSort = {onSort}>
+            <Sort sortKey = {"AUTHOR"} onSort = {onSort} activeSortKey = {sortKey}>
               Author
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"COMMENTS"} onSort = {onSort}>
+            <Sort sortKey = {"COMMENTS"} onSort = {onSort} activeSortKey = {sortKey}>
               Comments
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"POINTS"} onSort = {onSort}>
+            <Sort sortKey = {"POINTS"} onSort = {onSort} activeSortKey = {sortKey}>
               Points
             </Sort>
           </span>

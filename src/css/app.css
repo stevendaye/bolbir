@@ -8,7 +8,7 @@
 header {
   position: relative;
   background-image: linear-gradient(50deg, rgb(20, 19, 19), rgb(167, 15, 15), rgb(167, 15, 15), red);
-  height: 350px;
+  height: 275px;
 }
 
 header div.up-front {
@@ -29,7 +29,7 @@ header div.up-front h1 {
 header div.up-front h2 {
   color: white;
   text-align: center;
-  margin: 45px 0 35px 0;
+  margin: 20px 0 25px 0;
 }
 
 header div:last-child a {
@@ -89,15 +89,6 @@ ul li a {
   background-color: rgb(20, 19, 19);
   border-radius: 0 25px 25px 0;
   border: none;
-}
-
-/* Sorts styles */
-.sort-points {
-  color: rgb(167, 15, 15);
-  font-size: 2em;
-  font-weight: bold;
-  margin: 10px 0 10px 0;
-  float: right;
 }
 
 /* #### Search Result Style #### */
@@ -215,4 +206,42 @@ div.more-btn-wrapper {
   color: rgba(20, 19, 19, .2);
   text-align: center;
   margin: 0 5px 40px 0;
+}
+
+/* Sort Buttons Styles */
+.sort-points {
+  color: rgb(20, 19, 19);
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0 10px 0;
+  float: right;
+}
+
+div.sort-points span:first-child .sort-btn {
+  border-radius: 7px 0 0 7px;
+  -webkit-border-raduis: 7px 0 0 7px;
+  -moz-border-raduis: 7px 0 0 7px;
+}
+
+div.sort-points span:last-child .sort-btn {
+  border-radius: 0 7px 7px 0;
+  -webkit-border-raduis: 0 7px 7px 0;
+  -moz-border-raduis: 0 7px 7px 0;
+  margin-right: 10px;
+}
+
+.sort-btn {
+  color: rgb(80, 78, 78);
+  background-color: white;
+  border: 1px solid rgb(215, 215, 215);
+  border-right: 1px solid rgb(215, 215, 215);
+  margin: 0;
+  padding: 7px 15px 7px 15px;
+}
+
+.sort-btn-active, .sort-btn:hover {
+  background-color: rgb(20, 19, 19);
+  border: 1px solid rgb(20, 19, 19);
+  border-bottom: 2px solid white;
+  color: white;
 }
