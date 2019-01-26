@@ -13,34 +13,61 @@ const SORTS = {
   POINTS: list => sortBy(list, "points").reverse()
 }
 
-const Table = ({list, duplicateKey, onDismiss, sortKey, onSort, isSortReverse }) => {
+class Table extends React.Component {
 
-  const sortedList = SORTS[sortKey](list);
-  const reverseSortedList = isSortReverse
-    ? sortedList.reverse()
-    : sortedList
+  constructor (props) {
+    super(props);
 
-  return (
-    <div className = "search-result">
+    this.state = {
+      sortKey: "NONE",
+      isSortReverse: false,
+    }
+
+    this.onSort = this.onSort.bind(this);
+  }
+
+  onSort (sortKey) {
+    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey, isSortReverse });
+  }
+
+  render () {
+    const {
+      sortKey,
+      isSortReverse
+    } = this.state;
+
+    const {
+      list,
+      onDismiss
+    } = this.props;
+
+    const sortedList = SORTS[sortKey](list);
+    const reverseSortedList = isSortReverse
+      ? sortedList.reverse()
+      : sortedList
+
+    return (
+      <div className = "search-result">
 
         <div className = "sort-points">
           <span className = "sort-name">
-            <Sort sortKey = {"TITLE"} onSort = {onSort} activeSortKey = {sortKey}>
+            <Sort sortKey = {"TITLE"} onSort = {this.onSort} activeSortKey = {sortKey}>
               Title
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"AUTHOR"} onSort = {onSort} activeSortKey = {sortKey}>
+            <Sort sortKey = {"AUTHOR"} onSort = {this.onSort} activeSortKey = {sortKey}>
               Author
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"COMMENTS"} onSort = {onSort} activeSortKey = {sortKey}>
+            <Sort sortKey = {"COMMENTS"} onSort = {this.onSort} activeSortKey = {sortKey}>
               Comments
             </Sort>
           </span>
           <span className = "sort-name">
-            <Sort sortKey = {"POINTS"} onSort = {onSort} activeSortKey = {sortKey}>
+            <Sort sortKey = {"POINTS"} onSort = {this.onSort} activeSortKey = {sortKey}>
               Points
             </Sort>
           </span>
@@ -48,31 +75,32 @@ const Table = ({list, duplicateKey, onDismiss, sortKey, onSort, isSortReverse })
         </div>
         <div className = "clear"></div>
 
-      {reverseSortedList.map( item =>
-        <section
-          key = {item.objectID}
-          style = { (!item.title || !item.url || item.objectID === duplicateKey) ? {display: "none"} : {display: "block"}}
-        >
-          <h3><a href= {item.url}>{item.title}</a></h3>
-          <div className = "clear"></div>
-          <i>{item.author}</i>
-          <p><a href= {item.url}>{item.url}</a></p>
-          <hr/>
-          <p>{item.title}<a href= {item.url}><em className = "read-more">...Read More...</em></a></p>
-          <span>Comments: {item.num_comments}</span>
-          <span>Points: {item.points}</span>
-          <Button
-            type = "button"
-            className = "rm-btn"
-            onClick = {() => {onDismiss(item.objectID)}}
+        {reverseSortedList.map( item =>
+          <section
+            key = {item.objectID}
+            style = { (!item.title || !item.url) ? {display: "none"} : {display: "block"}}
           >
-            Dismiss
-          </Button>
-          <span className = "search-opt">...</span>
-        </section>
-      )}
-    </div>
-  );
+            <h3><a href= {item.url}>{item.title}</a></h3>
+            <div className = "clear"></div>
+            <i>{item.author}</i>
+            <p><a href= {item.url}>{item.url}</a></p>
+            <hr/>
+            <p>{item.title}<a href= {item.url}><em className = "read-more">...Read More...</em></a></p>
+            <span>Comments: {item.num_comments}</span>
+            <span>Points: {item.points}</span>
+            <Button
+              type = "button"
+              className = "rm-btn"
+              onClick = {() => {onDismiss(item.objectID)}}
+            >
+              Dismiss
+            </Button>
+            <span className = "search-opt">...</span>
+          </section>
+        )}
+      </div>
+    );
+  }
 }
 
 // Checking Table Props type
@@ -87,9 +115,7 @@ Table.propTypes = {
       points: PropTypes.number,
     })
   ).isRequired,
-  onDismiss: PropTypes.func.isRequired,
-  sortKey: PropTypes.string.isRequired,
-  onSort: PropTypes.func.isRequired
+  onDismiss: PropTypes.func.isRequired
 };
 
 export default Table;
