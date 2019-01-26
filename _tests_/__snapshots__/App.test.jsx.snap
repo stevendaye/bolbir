@@ -96,6 +96,50 @@ exports[`App has a valid snapshot 1`] = `
     <div
       className="sort-points"
     >
+      <span
+        className="sort-name"
+      >
+        <button
+          className="sort-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Title
+        </button>
+      </span>
+      <span
+        className="sort-name"
+      >
+        <button
+          className="sort-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Author
+        </button>
+      </span>
+      <span
+        className="sort-name"
+      >
+        <button
+          className="sort-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Comments
+        </button>
+      </span>
+      <span
+        className="sort-name"
+      >
+        <button
+          className="sort-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Points
+        </button>
+      </span>
       ...
     </div>
     <div
@@ -214,6 +258,16 @@ exports[`Search has a valid snapshot 1`] = `
 </div>
 `;
 
+exports[`Sort has a valid snapshot 1`] = `
+<button
+  className="sort-btn sort-btn-active"
+  onClick={[Function]}
+  type="button"
+>
+  Sort
+</button>
+`;
+
 exports[`Table has a valid snapshot 1`] = `
 <div
   className="search-result"
@@ -221,6 +275,50 @@ exports[`Table has a valid snapshot 1`] = `
   <div
     className="sort-points"
   >
+    <span
+      className="sort-name"
+    >
+      <button
+        className="sort-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Title
+      </button>
+    </span>
+    <span
+      className="sort-name"
+    >
+      <button
+        className="sort-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Author
+      </button>
+    </span>
+    <span
+      className="sort-name"
+    >
+      <button
+        className="sort-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Comments
+      </button>
+    </span>
+    <span
+      className="sort-name"
+    >
+      <button
+        className="sort-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Points
+      </button>
+    </span>
     ...
   </div>
   <div

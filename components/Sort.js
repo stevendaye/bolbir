@@ -25,6 +25,7 @@ const Sort = ({ onSort, sortKey, children, activeSortKey }) => {
 Sort.propTypes = {
   onSort: PropTypes.func.isRequired,
   sortKey: PropTypes.string.isRequired,
+  activeSortKey: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired
 }
 

@@ -11,10 +11,11 @@ import Loading from "../components/Loading"
 import Footer from "../components/Footer";
 import Err from "../components/Error";
 import Button from "../components/Button";
+import Sort from "../components/Sort";
 
 Enzyme.configure({ adapter: new Adapter });
 
-// Creating a Test Suit for the App Component
+// Creating a Test suite for the App Component
 describe ("App", () => {
 
   // Writing a test case for rendering properly the component
@@ -35,7 +36,7 @@ describe ("App", () => {
 
 });
 
-// Creating a test suit for the Search Component
+// Creating a test suite for the Search Component
 describe("Search", () => {
 
   const value = "redux";
@@ -76,7 +77,7 @@ describe("Search", () => {
 
 });
 
-// Creating a test suit for the Loading Component
+// Creating a test suite for the Loading Component
 describe("Loading", () => {
 
   it("renders without crashing", () => {
@@ -97,7 +98,7 @@ describe("Loading", () => {
 
 });
 
-// Creating a test suit for the Error Component
+// Creating a test suite for the Error Component
 describe("Error", () => {
 
   it("renders without crashing", () => {
@@ -116,7 +117,7 @@ describe("Error", () => {
 
 });
 
-// Creating a test suit for the Button Component
+// Creating a test suite for the Button Component
 describe("Button", () => {
 
   it("renders without crashing", () => {
@@ -147,7 +148,40 @@ describe("Button", () => {
 
 });
 
-// Creating a test suit for the Footer Component;
+// Creating a test suite for the Sort Component
+describe("Sort", () => {
+
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(
+      <Sort
+        sortKey = {"sort"}
+        activeSortKey = {"sort"}
+        onSort = {() => {console.log("Sorted")}}
+      >
+        Sort
+      </Sort>, div
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
+  test("has a valid snapshot", () => {
+    const component = renderer.create(
+      <Sort
+        sortKey = {"sort"}
+        activeSortKey = {"sort"}
+        onSort = {() => {console.log("Sorted")}}
+      >
+        Sort
+      </Sort>
+    );
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+});
+
+// Creating a test suite for the Footer Component
 describe("Footer", () => {
 
   it("renders without crashing", () => {
@@ -166,7 +200,7 @@ describe("Footer", () => {
 
 });
 
-// Creating a test suit for the Table Component
+// Creating a test suite for the Table Component
 describe("Table", () => {
 
   const props = {
