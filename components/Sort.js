@@ -2,16 +2,19 @@
 import React from "react";
 import Button from "../components/Button";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 const Sort = ({ onSort, sortKey, children, activeSortKey }) => {
   
-  const sortClass = ["sort-btn"]
-  sortKey === activeSortKey && sortClass.push("sort-btn-active");
+  const sortClass = classNames(
+    "sort-btn",
+    {"sort-btn-active": sortKey === activeSortKey} 
+  );
 
   return (
     <Button
       type = "button"
-      className = {sortClass.join(" ")}
+      className = {sortClass}
       onClick = {() => {onSort(sortKey)}}
     >
       {children}
