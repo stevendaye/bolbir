@@ -52,18 +52,20 @@ class App extends Component {
   }
   setSearchTopStories (result) {
     const { hits, page } = result;
-    const { results, searchKey } = this.state;
-    const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
-    const updatedHits = [ ...old_hits, ...hits];
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: {
-          hits: updatedHits,
-          page
-        }
-      },
-      isLoading: false
+    this.setState( prevState => {
+      const { results, searchKey } = prevState;
+      const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
+      const updatedHits = [ ...old_hits, ...hits];
+      return {
+        results: {
+          ...results,
+          [searchKey]: {
+            hits: updatedHits,
+            page
+          }
+        },
+        isLoading: false
+      }
     });
   } 
   onSearchSubmit (e) {
@@ -78,19 +80,21 @@ class App extends Component {
   }
 
   onDismiss (id) {
-    const { results, searchKey } = this.state;
-    const {hits, page} = results[searchKey];
-    const isNotID = item => item.objectID !== id;
-    const updatedHits = hits.filter(isNotID);
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: {
-          hits: updatedHits,
-          page
+    this.setState( prevState => {
+      const { results, searchKey } = prevState;
+      const {hits, page} = results[searchKey];
+      const isNotID = item => item.objectID !== id;
+      const updatedHits = hits.filter(isNotID);
+      return {
+        results: {
+          ...results,
+          [searchKey]: {
+            hits: updatedHits,
+            page
+          }
         }
       }
-    });
+    })
   }
   onSearchChange (e) {
     this.setState({ searchTerm: e.target.value });
