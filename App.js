@@ -171,34 +171,40 @@ class App extends Component {
           </div>
         </header>
 
-        { !error
-          ? <Table
-              list = {list}
-              onDismiss = {this.onDismiss}
-            />
-          : <Err/>
-        }
+        <TableWithError
+          error = {error}
+          list = {list}
+          onDismiss = {this.onDismiss}
+        />
+        <ButtonWithLoading
+          type = "button"
+          className = "more-btn"
+          isLoading = {isLoading}
+          onClick = {() => { this.loadMoreTopStories() || this.fecthSearchTopStories(searchKey, page + 1) }}
+        >
+          +
+        </ButtonWithLoading>
         
-        {
-          isLoading
-          ? <Loading
-            error = {error}
-            isLoadingMore = {isLoadingMore}
-          />
-          : <div className = "more-btn-wrapper">
-              <Button
-                type = "button"
-                className = "more-btn"
-                onClick = {() => { this.loadMoreTopStories() || this.fecthSearchTopStories(searchKey, page + 1)}}
-              >
-                +
-              </Button>
-            </div>
-        }
         <Footer/>
       </div>
     );
   }
 }
+
+// Creating a HOC for the Error and Table Components
+const withError = Component => ({ error, ...rest }) =>
+  error
+    ? <Err/>
+    : <Component {...rest} />
+
+const TableWithError = withError(<Table/>);
+
+// Creating a HOC for the Loading and More Button Components
+const withLoading = Component => ({ isLoading, ...rest }) =>
+  isLoading
+    ? <Loading/>
+    : <Component {...rest} />
+
+const ButtonWithLoading = withLoading(<Button/>);
 
 export default App;
