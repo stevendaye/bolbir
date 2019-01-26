@@ -17,6 +17,38 @@ const PARAM_PAGE = "page=";
 const PARAM_HPP = "hitsPerPage=";
 const DEFAULT_HPP = "15";
 
+const updateSearchTopStories = (hits, page) => prevState => {
+  const { results, searchKey } = prevState;
+  const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
+  const updatedHits = [ ...old_hits, ...hits];
+  return {
+    results: {
+      ...results,
+      [searchKey]: {
+        hits: updatedHits,
+        page
+      }
+    },
+    isLoading: false
+  }
+};
+
+const removeSearchTopStories = id => prevState => {
+  const { results, searchKey } = prevState;
+  const {hits, page} = results[searchKey];
+  const isNotID = item => item.objectID !== id;
+  const updatedHits = hits.filter(isNotID);
+  return {
+    results: {
+      ...results,
+      [searchKey]: {
+        hits: updatedHits,
+        page
+      }
+    }
+  }
+};
+
 class App extends Component {
   // Using ES6 Class Field to prevent the component from updating the state when it's unmounted
   _isMounted = false;
@@ -52,21 +84,7 @@ class App extends Component {
   }
   setSearchTopStories (result) {
     const { hits, page } = result;
-    this.setState( prevState => {
-      const { results, searchKey } = prevState;
-      const old_hits = (results && results[searchKey]) ? results[searchKey].hits : [];
-      const updatedHits = [ ...old_hits, ...hits];
-      return {
-        results: {
-          ...results,
-          [searchKey]: {
-            hits: updatedHits,
-            page
-          }
-        },
-        isLoading: false
-      }
-    });
+    this.setState(updateSearchTopStories(hits, page));
   } 
   onSearchSubmit (e) {
     const { searchTerm } = this.state;
@@ -80,21 +98,7 @@ class App extends Component {
   }
 
   onDismiss (id) {
-    this.setState( prevState => {
-      const { results, searchKey } = prevState;
-      const {hits, page} = results[searchKey];
-      const isNotID = item => item.objectID !== id;
-      const updatedHits = hits.filter(isNotID);
-      return {
-        results: {
-          ...results,
-          [searchKey]: {
-            hits: updatedHits,
-            page
-          }
-        }
-      }
-    })
+    this.setState(removeSearchTopStories(id));
   }
   onSearchChange (e) {
     this.setState({ searchTerm: e.target.value });
