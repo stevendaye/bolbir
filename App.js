@@ -197,14 +197,19 @@ const withError = Component => ({ error, ...rest }) =>
     ? <Err/>
     : <Component {...rest} />
 
-const TableWithError = withError(<Table/>);
+const TableWithError = withError(Table);
 
 // Creating a HOC for the Loading and More Button Components
-const withLoading = Component => ({ isLoading, ...rest }) =>
+const withLoading = Component => ({ isLoading, error, isLoadingMore, ...rest }) =>
   isLoading
-    ? <Loading/>
-    : <Component {...rest} />
+    ? <Loading
+        error = {error}
+        isLoadingMore = {isLoadingMore}
+      />
+    : <div className = "more-btn-wrapper">
+        <Component {...rest} />
+      </div>
 
-const ButtonWithLoading = withLoading(<Button/>);
+const ButtonWithLoading = withLoading(Button);
 
 export default App;
