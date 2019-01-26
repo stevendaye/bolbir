@@ -179,7 +179,9 @@ class App extends Component {
         <ButtonWithLoading
           type = "button"
           className = "more-btn"
+          error = {error}
           isLoading = {isLoading}
+          isLoadingMore = {isLoadingMore}
           onClick = {() => { this.loadMoreTopStories() || this.fecthSearchTopStories(searchKey, page + 1) }}
         >
           +
