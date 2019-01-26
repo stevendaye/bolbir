@@ -107,6 +107,30 @@ exports[`App has a valid snapshot 1`] = `
   >
     Loading...
   </div>
+  <footer>
+    <div>
+      <p>
+        © 2019 All Right Reserved
+      </p>
+      <p>
+        <a
+          href="#"
+        >
+          Rules and Regulations
+        </a>
+      </p>
+      <p>
+        <a
+          href="#"
+        >
+          Privacy
+        </a>
+      </p>
+      <p>
+        Made with ❤ by Steven Daye
+      </p>
+    </div>
+  </footer>
 </div>
 `;
 
@@ -128,6 +152,33 @@ exports[`Error has a valid snapshot 1`] = `
   <br />
   Please, check your internet connection or update your date!
 </div>
+`;
+
+exports[`Footer has a valid snapshot 1`] = `
+<footer>
+  <div>
+    <p>
+      © 2019 All Right Reserved
+    </p>
+    <p>
+      <a
+        href="#"
+      >
+        Rules and Regulations
+      </a>
+    </p>
+    <p>
+      <a
+        href="#"
+      >
+        Privacy
+      </a>
+    </p>
+    <p>
+      Made with ❤ by Steven Daye
+    </p>
+  </div>
+</footer>
 `;
 
 exports[`Loading has a valid snapshot 1`] = `
