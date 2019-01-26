@@ -2,8 +2,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Loading = ({ error }) =>
-  <div className = { error? "hide" : "loading"}>
+const Loading = ({ error, isLoadingMore }) =>
+  <div className = { error ? "hide" : (isLoadingMore ? "loading-more" : "loading")}>
     Loading...
   </div>
 

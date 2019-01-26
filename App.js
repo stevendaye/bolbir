@@ -4,10 +4,10 @@ import Search from "./components/Search";
 import Table from "./components/Table";
 import Loading from "./components/Loading";
 import Err from "./components/Error";
+import Footer from "./components/Footer";
 import "./src/css/app.css"
 import Button from "./components/Button";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 const PATH_BASE = "http://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
@@ -29,9 +29,11 @@ class App extends Component {
       searchTerm: DEFAULT_SEARCH,
       error: null,
       isLoading: false,
-      searchKey: ""
+      isLoadingMore: false,
+      searchKey: "",
     };
 
+    this.loadMoreTopStories = this.loadMoreTopStories.bind(this);
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     this.fecthSearchTopStories = this.fecthSearchTopStories.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
@@ -96,6 +98,9 @@ class App extends Component {
   notify () {
     console.log("Search Term Sent.");
   }
+  loadMoreTopStories () {
+    this.setState({ isLoadingMore: true });
+  }
 
   // Using core component licycles methods
   componentDidMount () {
@@ -115,6 +120,7 @@ class App extends Component {
       searchTerm,
       error,
       isLoading,
+      isLoadingMore,
       searchKey
     } = this.state;
 
@@ -177,17 +183,19 @@ class App extends Component {
           isLoading
           ? <Loading
             error = {error}
+            isLoadingMore = {isLoadingMore}
           />
           : <div className = "more-btn-wrapper">
               <Button
                 type = "button"
                 className = "more-btn"
-                onClick = {() => {this.fecthSearchTopStories(searchKey, page + 1)}}
+                onClick = {() => { this.loadMoreTopStories() || this.fecthSearchTopStories(searchKey, page + 1)}}
               >
                 +
               </Button>
             </div>
         }
+        <Footer/>
       </div>
     );
   }
