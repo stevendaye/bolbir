@@ -8,7 +8,6 @@ import App from "../App";
 import Table from "../components/Table"
 import Search from "../components/Search"
 import Loading from "../components/Loading"
-import Footer from "../components/Footer";
 import Err from "../components/Error";
 import Button from "../components/Button";
 
@@ -141,25 +140,6 @@ describe("Button", () => {
         Click Me
       </Button>
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-});
-
-// Creating a test suit for the Footer Component;
-describe("Footer", () => {
-
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
-    ReactDOM.render(
-      <Footer/>, div
-    );
-    ReactDOM.unmountComponentAtNode(div);
-  });
-
-  test("has a valid snapshot", () => {
-    const component = renderer.create(<Footer/>);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
