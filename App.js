@@ -26,11 +26,13 @@ class App extends Component {
 
     this.state = {
       results: null,
+      duplicateKey: null,
       searchTerm: DEFAULT_SEARCH,
       error: null,
       isLoading: false,
       isLoadingMore: false,
       searchKey: "",
+      sortKey: "NONE"
     };
 
     this.loadMoreTopStories = this.loadMoreTopStories.bind(this);
@@ -39,8 +41,9 @@ class App extends Component {
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
-    this.notify = this.notify.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.notify = this.notify.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   // Defining core coponent methods
@@ -89,7 +92,8 @@ class App extends Component {
           hits: updatedHits,
           page
         }
-      }
+      },
+      duplicateKey: id
     });
   }
   onSearchChange (e) {
@@ -100,6 +104,10 @@ class App extends Component {
   }
   loadMoreTopStories () {
     this.setState({ isLoadingMore: true });
+  }
+
+  onSort (sortKey) {
+    this.setState({ sortKey });
   }
 
   // Using core component licycles methods
@@ -117,11 +125,13 @@ class App extends Component {
 
     const {
       results,
+      duplicateKey,
       searchTerm,
       error,
       isLoading,
       isLoadingMore,
-      searchKey
+      searchKey,
+      sortKey
     } = this.state;
 
     const page = (
@@ -174,7 +184,10 @@ class App extends Component {
         <TableWithError
           error = {error}
           list = {list}
+          duplicateKey = {duplicateKey}
           onDismiss = {this.onDismiss}
+          sortKey = {sortKey}
+          onSort = {this.onSort}
         />
         <ButtonWithLoading
           type = "button"
