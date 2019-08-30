@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "heroku-prebuild": "npm install --dev",
-    "start": "webpack --config ./webpack.config.js --mode production"
+    "start": "webpack --config ./webpack.config.js --mode production",
+    "heroku-probuild": "npm install --dev && webpack -p"
   },
   "jest": {
     "moduleNameMapper": {
@@ -25,15 +25,6 @@
   "author": "Steven Daye <stevendaye@yahoo.com>",
   "license": "MIT",
   "devDependencies": {
-    "webpack-dev-server": "^3.1.14"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
-    "prop-types": "^15.6.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.2.3",
@@ -52,6 +43,15 @@
     "regenerator-runtime": "^0.13.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }
