@@ -8,9 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "heroku-prebuild": "npm install --dev",
-    "start": "webpack --config ./webpack.config.js --mode production -watch --colors"
+    "start": "webpack --config ./webpack.config.js --mode production"
   },
   "jest": {
     "moduleNameMapper": {
