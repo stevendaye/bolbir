@@ -8,13 +8,21 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "webpack --config ./webpack.config.js --mode production",
-    "heroku-probuild": "npm install --dev && webpack -p"
+    "clean-public": "npm run remove-public && mkdir public",
+    "remove-public": "node_modules/.bin/rimraf ./public",
+    "build:html": "babel-node tools/buildHtml.js",
+    "prebuild": "npm-run-all clean-public build:html",
+    "build": "babel-node tools/build.js",
+    "postbuild": "babel-node tools/publicServer.js",
+    "dev": "webpack-dev-server --config ./webpack.config.dev.js --mode development"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg|mp4)$": "<rootDir>/_mocks_/moduleMocker.js",
       "\\.(css|less|sass)$": "identity-obj-proxy"
+    },
+    "resolutions": {
+      "babel-core": "7.0.0-bridge.0"
     }
   },
   "repository": {
@@ -25,33 +33,50 @@
   "author": "Steven Daye <stevendaye@yahoo.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.0",
+    "@babel/node": "^7.0.0",
+    "babel-jest": "^23.4.2",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^23.6.0",
+    "jest": "^25.0.0",
     "react-hot-loader": "^4.6.3",
     "react-test-renderer": "^16.7.0",
     "regenerator-runtime": "^0.13.1",
-    "style-loader": "^0.23.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.1",
+    "babel-loader": "^8.0.0-beta.6",
+    "cheerio": "^1.0.0-rc.3",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
+    "colors": "^1.3.3",
+    "compression": "^1.7.4",
+    "css-loader": "^3.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "npm-run-all": "^4.1.5",
+    "open": "^6.4.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "serve-favicon": "^2.5.0",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   }
 }
