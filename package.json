@@ -13,8 +13,7 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-public build:html",
     "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/publicServer.js",
-    "dev": "webpack-dev-server --config ./webpack.config.dev.js --mode development"
+    "postbuild": "babel-node tools/publicServer.js"
   },
   "jest": {
     "moduleNameMapper": {
