@@ -20,7 +20,6 @@ app.listen(port, function(err) {
   if (err) {
     console.log(err);
   } else {
-    console.log("Server running in production at https://www.bolbir.herokuapp.com");
-    // open(`http://localhost:${port}`);
+    open(`http://localhost:${port}`);
   }
 });
